@@ -2,3 +2,5 @@ Get the user data
 process data
 
 create an avatar for user
+
+login and logout
