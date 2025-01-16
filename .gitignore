@@ -1,0 +1,5 @@
+# Ignore docker-compose.yml
+docker-compose.yml
+
+# Ignore the application.properties file in InventoryApp-Backend
+InventoryApp-Backend/src/main/resources/application.properties
