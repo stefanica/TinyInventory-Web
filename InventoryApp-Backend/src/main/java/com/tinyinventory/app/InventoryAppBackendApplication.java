@@ -8,6 +8,8 @@ public class InventoryAppBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(InventoryAppBackendApplication.class, args);
+
+
 	}
 
 }
