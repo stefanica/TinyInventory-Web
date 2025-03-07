@@ -10,8 +10,8 @@ import java.util.*;
 public interface ProductRepo extends JpaRepository<Product, Integer> {
 
 
-    //SQL: SELECT * FROM PRODUCT WHERE userId = ?1
-    //JPA SQL: @Query(SELECT p FROM Product p WHERE p.userID = :userId)
+    //SQL: SELECT * FROM products WHERE user_id = ?1
+    //JPA SQL: @Query("SELECT p FROM products p WHERE p.user_id = :userId")
     Optional<List<Product>> findAllByUserId(int userId);
 
 }

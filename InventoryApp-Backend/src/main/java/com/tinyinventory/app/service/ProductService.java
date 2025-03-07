@@ -2,7 +2,7 @@ package com.tinyinventory.app.service;
 
 
 import com.tinyinventory.app.model.Product;
-import com.tinyinventory.app.model.Users;
+import com.tinyinventory.app.model.User;
 import com.tinyinventory.app.repo.ProductRepo;
 import com.tinyinventory.app.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ProductService {
 
         int userId = 0;
 
-        Optional<Users> userOptional = userRepo.findUserByUsername(username);
+        Optional<User> userOptional = userRepo.findUserByUsername(username);
         if (!userOptional.isPresent()) {
             return new ArrayList<Product>();
         } else {
@@ -33,6 +33,5 @@ public class ProductService {
 
         Optional<List<Product>> productList = productRepo.findAllByUserId(userId);
         return productList.orElseGet(ArrayList::new);
-
     }
 }

@@ -13,6 +13,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "products") // Specifies the table name in PostgreSQL
 public class Product {
 
     @Id //Primary-Key
@@ -28,11 +29,11 @@ public class Product {
     private User user; // Foreign Key to User table*/
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false,
+    @JoinColumn(name = "user", referencedColumnName = "id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_product_user", value = ConstraintMode.CONSTRAINT)) // Creates FK constraint
     @OnDelete(action = OnDeleteAction.CASCADE) // Enables ON DELETE CASCADE
     @JsonIgnore // Prevent serialization
-    private Users user; // Foreign Key to User table
+    private User user; // Foreign Key to User table
 
     /*
     --> The @JoinColumn(name = "user_id") explicitly tells JPA that the foreign key column
@@ -44,8 +45,8 @@ public class Product {
 
      */
 
-    @Column(nullable = false)
-    private int userId;  // Store only userId. Used when searching for a product.
+    @Column(name = "user_id", nullable = false) // user_id maps to the database column name
+    private int userId;  // Store only user_id. Used when searching for a product.
 
     @Column(nullable = false)
     private String name;

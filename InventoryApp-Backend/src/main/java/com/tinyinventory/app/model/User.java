@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
     @UniqueConstraint(name = "uk_users_username", columnNames = "username")
 }) // Ensures username uniqueness at the database level *** Not sure if I want this
 */
-public class Users {
+@Table(name = "users") // Specifies the table name in PostgreSQL
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment primary key
@@ -28,11 +29,11 @@ public class Users {
     @Column(nullable = false) // Ensures password is required
     private String password;
 
-    private String full_name; // Can be nullable
+    @Column(name = "full_name") //PostgreSQL uses snake case notation
+    private String fullName; // Can be nullable
 
     @Column(unique = true) // Ensures email uniqueness but allows null
     private String email;
-
 
 
 }
