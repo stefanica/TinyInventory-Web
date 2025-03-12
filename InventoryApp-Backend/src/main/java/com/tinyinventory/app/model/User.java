@@ -1,6 +1,9 @@
 package com.tinyinventory.app.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +29,8 @@ public class User {
     @Column(nullable = false, unique = true) // Unique and not null
     private String username;
 
+    //@JsonIgnore // Prevent serialization
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //This allows deserializing (accepting password input) but prevents it from being serialized (returned in responses). ***NOT WORKING
     @Column(nullable = false) // Ensures password is required
     private String password;
 

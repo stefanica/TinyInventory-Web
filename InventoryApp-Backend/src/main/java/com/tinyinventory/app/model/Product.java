@@ -18,7 +18,7 @@ public class Product {
 
     @Id //Primary-Key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Unique, Auto-Increment
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long id;
 
     /*@ManyToOne
@@ -29,7 +29,7 @@ public class Product {
     private User user; // Foreign Key to User table*/
 
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "id", nullable = false,
+    @JoinColumn(name = "users", referencedColumnName = "id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_product_user", value = ConstraintMode.CONSTRAINT)) // Creates FK constraint
     @OnDelete(action = OnDeleteAction.CASCADE) // Enables ON DELETE CASCADE
     @JsonIgnore // Prevent serialization

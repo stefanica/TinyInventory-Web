@@ -1,5 +1,6 @@
 package com.tinyinventory.app.controller;
 
+import com.tinyinventory.app.dto.UserResponseDto;
 import com.tinyinventory.app.exceptions.EmailAlreadyExistsException;
 import com.tinyinventory.app.exceptions.InvalidPasswordFormatException;
 import com.tinyinventory.app.exceptions.UsernameAlreadyExistsException;
@@ -25,7 +26,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> saveUser(@RequestBody User user) {
        try {
-           User savedUser = userService.saveUser(user);
+           UserResponseDto savedUser = userService.saveUser(user);
 
            Map<String, Object> response = new HashMap<>();
            response.put("username", savedUser.getUsername());
@@ -52,7 +53,8 @@ public class UserController {
        } catch (Exception e) {
            return ResponseEntity
                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                   .body(Map.of("message", "An unexpected error occurred"));
+                   .body(Map.of("message", e.getMessage()));
+                  // .body(Map.of("message", "An unexpected error occurred"));
        }
 
     }
