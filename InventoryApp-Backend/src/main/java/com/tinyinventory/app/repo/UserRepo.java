@@ -2,6 +2,9 @@ package com.tinyinventory.app.repo;
 
 import com.tinyinventory.app.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -23,6 +26,11 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     //@Query("SELECT COUNT(u) > 0 FROM users u WHERE u.username = :username");
     boolean existsByEmail(String email);
 
+    //Update password in case it was forgotten
+    //UPDATE Users SET password = ?1 WHERE email = ?2; //SQL
+    @Modifying
+    @Query("UPDATE User u SET u.password = :password WHERE u.email = :email")
+    int setPasswordByEmail(@Param("password") String password, @Param("email") String email);
 
 
 }

@@ -3,3 +3,6 @@ docker-compose.yml
 
 # Ignore the application.properties file in InventoryApp-Backend
 InventoryApp-Backend/src/main/resources/application.properties
+
+#Ignore API Keys from different resources
+InventoryApp-Backend/src/main/java/com/tinyinventory/app/misc/APIKeys.java

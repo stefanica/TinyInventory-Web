@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +20,7 @@ public class Product {
 
     @Id //Primary-Key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Unique, Auto-Increment
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long id;
 
     /*@ManyToOne
@@ -29,7 +31,7 @@ public class Product {
     private User user; // Foreign Key to User table*/
 
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "id", nullable = false,
+    @JoinColumn(name = "users", referencedColumnName = "id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_product_user", value = ConstraintMode.CONSTRAINT)) // Creates FK constraint
     @OnDelete(action = OnDeleteAction.CASCADE) // Enables ON DELETE CASCADE
     @JsonIgnore // Prevent serialization
@@ -45,19 +47,21 @@ public class Product {
 
      */
 
+    /*
     @Column(name = "user_id", nullable = false) // user_id maps to the database column name
     private int userId;  // Store only user_id. Used when searching for a product.
+    */
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false) // Ensures uniqueness for code
-    private int code;
+    private Long code;
 
     @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false)
-    private int price;
+    @Column(nullable = false, precision = 19, scale = 4) // Precision = total digits, Scale = decimal digits
+    private BigDecimal price;
 
 }
